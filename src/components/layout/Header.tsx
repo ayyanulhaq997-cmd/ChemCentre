@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Search, ShoppingCart, Menu, Globe, Coins, X, ChevronDown, Phone, Mail, User, Home } from "lucide-react";
+import { Search, ShoppingCart, Menu, X, ChevronDown, Phone, Mail, Home } from "lucide-react";
 import { useCartStore } from "@/store/useCartStore";
 
 const Header = () => {
-    const { items, currency, language } = useCartStore();
+    const { items } = useCartStore();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     return (

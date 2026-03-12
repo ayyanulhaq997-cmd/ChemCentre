@@ -5,6 +5,7 @@ import { ShoppingCart, Eye, Star } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import QuickView from "./QuickView";
+import Image from "next/image";
 
 interface ProductCardProps {
   id: number;
@@ -25,10 +26,11 @@ const ProductCard = (product: ProductCardProps) => {
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden bg-[#0a0a0a]">
         <Link href={`/product/${product.slug}`} className="block h-full">
-            <img 
+            <Image 
               src={product.image} 
               alt={product.name}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+              fill
+              className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100"
             />
         </Link>
         

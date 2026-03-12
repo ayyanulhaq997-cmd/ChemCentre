@@ -4,11 +4,8 @@ import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import ProductCard from "@/components/shop/ProductCard";
 import Footer from "@/components/layout/Footer";
-<<<<<<< HEAD
-import { Truck, ShieldCheck, Coins, Package } from "lucide-react";
-=======
-import { ArrowRight, ChevronRight, ShieldCheck, Truck, Coins, Star, Mail, Zap, FlaskConical } from "lucide-react";
->>>>>>> 6b8ea4478d559a3e5cc251959e1c945667a7664d
+import Image from "next/image";
+import { ArrowRight, ChevronRight, ShieldCheck, Truck, Coins, Star, Mail, FlaskConical, Package } from "lucide-react";
 
 const products = [
   { id: 1, name: "3-CMC ICE BIG CRYSTALS", price: 24.99, image: "https://chemcentrum.nl/wp-content/uploads/2023/04/3-cmc-ice-big-crystals.jpg", slug: "3-cmc-ice-big-crystals", isBestseller: true },
@@ -41,10 +38,11 @@ export default function Home() {
               
               {/* Banner Area */}
               <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden border border-white/5 group">
-                <img 
+                <Image 
                   src="https://chemcentrum.nl/wp-content/uploads/2023/04/3-cmc-ice-big-crystals.jpg" 
                   alt="Banner" 
-                  className="w-full h-full object-cover opacity-40 transition-all duration-700"
+                  fill
+                  className="object-cover opacity-40 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent flex items-center p-12">
                   <div className="max-w-md text-left">

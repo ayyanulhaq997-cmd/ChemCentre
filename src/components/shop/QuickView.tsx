@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ShoppingCart, ShieldCheck, Truck, RefreshCcw, Minus, Plus, X } from "lucide-react";
+import { ShieldCheck, Truck, RefreshCcw, Minus, Plus, X } from "lucide-react";
 import { useCartStore } from "@/store/useCartStore";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface QuickViewProps {
     id: number;
@@ -44,11 +45,14 @@ const QuickView = ({ id, name, price, image, slug, onClose }: QuickViewProps) =>
                 <div className="flex flex-col md:flex-row">
                     {/* Image Area */}
                     <div className="md:w-1/2 p-12 bg-[#0a0a0a] flex items-center justify-center">
-                        <img 
-                            src={image} 
-                            alt={name} 
-                            className="w-full h-full object-contain max-h-[400px]"
-                        />
+                        <div className="relative w-full h-full">
+                            <Image 
+                                src={image} 
+                                alt={name} 
+                                fill
+                                className="object-contain max-h-[400px]"
+                            />
+                        </div>
                     </div>
 
                     {/* Content Area */}
