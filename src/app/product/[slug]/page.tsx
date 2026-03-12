@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import Header from "@/components/layout/Header";
 import QuickView from "@/components/shop/QuickView";
 import Sidebar from "@/components/layout/Sidebar";
+import Footer from "@/components/layout/Footer";
 import { ChevronRight } from "lucide-react";
 
 // Mock products database
@@ -73,14 +74,7 @@ export default function ProductDetailsPage() {
                 </div>
             </main>
 
-            <footer className="bg-white border-t border-gray-100 py-12">
-                <div className="container mx-auto px-4 text-center">
-                    <p className="text-gray-400 text-sm font-medium">
-                        &copy; 2026 CHEM CENTRUM. All rights reserved.
-                        Research Use Only &bull; Laboratory Grade Compounds.
-                    </p>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 }

@@ -5,10 +5,11 @@ import { Beaker, FlaskConical, TestTube2, Zap, Pill, Info } from "lucide-react";
 const categories = [
     { name: "3-CMC ICE", icon: FlaskConical, slug: "3-cmc-ice" },
     { name: "4-CMC BOULDER", icon: Beaker, slug: "4-cmc-boulder" },
-    { name: "PENTEDRONE SPARK", icon: Zap, slug: "pentedrone-spark" },
-    { name: "Pills / Tabletky", icon: Pill, slug: "pills" },
+    { name: "Pils / Tabletky", icon: Pill, slug: "pills" },
+    { name: "Synthetics / Syntetyki", icon: Zap, slug: "synthetics" },
     { name: "Crystals / Kryształy", icon: TestTube2, slug: "crystals" },
     { name: "Powder / Proszki", icon: Beaker, slug: "powder" },
+    { name: "Lab Equipment", icon: Info, slug: "equipment" },
 ];
 
 const Sidebar = () => {
