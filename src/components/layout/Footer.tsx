@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Zap, Phone, ShieldCheck, Truck, Award, Facebook, Twitter, Instagram } from "lucide-react";
+import { Mail, Phone, ShieldCheck, Truck, Award, Facebook, Twitter, Instagram } from "lucide-react";
 
 const Footer = () => {
     return (
