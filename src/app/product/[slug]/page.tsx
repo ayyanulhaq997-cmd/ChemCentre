@@ -46,7 +46,7 @@ export default function ProductDetailsPage() {
                             </div>
 
                             <div className="bg-white rounded-[3rem] p-12 border border-gray-100 shadow-sm">
-                                <QuickView {...product} />
+                                <QuickView {...product} onClose={() => {}} />
                             </div>
 
                             <div className="mt-12 bg-white rounded-[3rem] p-12 border border-gray-100 shadow-sm">
