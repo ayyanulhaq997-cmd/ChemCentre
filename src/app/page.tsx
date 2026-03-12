@@ -4,11 +4,7 @@ import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
 import ProductCard from "@/components/shop/ProductCard";
 import Footer from "@/components/layout/Footer";
-<<<<<<< HEAD
-import { Truck, ShieldCheck, Coins, Package } from "lucide-react";
-=======
-import { ArrowRight, ChevronRight, ShieldCheck, Truck, Coins, Star, Mail, Zap, FlaskConical } from "lucide-react";
->>>>>>> 6b8ea4478d559a3e5cc251959e1c945667a7664d
+import { ArrowRight, ChevronRight, ShieldCheck, Truck, Coins, Star, Mail, Zap, FlaskConical, Package } from "lucide-react";
 
 const products = [
   { id: 1, name: "3-CMC ICE BIG CRYSTALS", price: 24.99, image: "https://chemcentrum.nl/wp-content/uploads/2023/04/3-cmc-ice-big-crystals.jpg", slug: "3-cmc-ice-big-crystals", isBestseller: true },
@@ -112,4 +108,5 @@ export default function Home() {
     </div>
   );
 }
+
 
