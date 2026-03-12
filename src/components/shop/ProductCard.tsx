@@ -25,7 +25,7 @@ const ProductCard = (product: ProductCardProps) => {
     <div className="group bg-[#111111] border border-white/5 rounded-lg overflow-hidden flex flex-col hover:border-[#f5a623]/20 transition-all shadow-xl">
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden bg-[#0a0a0a]">
-        <Link href={`/product/${product.slug}`} className="block h-full">
+        <Link href={`/product/${product.slug}`} className="block h-full relative">
             <Image 
               src={product.image} 
               alt={product.name}

@@ -9,12 +9,12 @@ import { ChevronRight } from "lucide-react";
 
 // Mock products database
 const allProducts = [
-    { id: 1, name: "3-CMC ICE BIG CRYSTALS", price: 24.99, image: "https://chemcentrum.nl/wp-content/uploads/2023/04/3-cmc-ice-big-crystals.jpg", slug: "3-cmc-ice-big-crystals" },
-    { id: 2, name: "4-CMC BOULDER QUALITY", price: 29.50, image: "https://chemcentrum.nl/wp-content/uploads/2023/04/4-cmc-boulder.jpg", slug: "4-cmc-boulder" },
-    { id: 3, name: "PENTEDRONE SPARK ORIGINAL", price: 32.00, image: "https://chemcentrum.nl/wp-content/uploads/2023/04/pentedrone.jpg", slug: "pentedrone-spark" },
-    { id: 4, name: "CLONAZOLAM 0.5MG PILLS", price: 15.00, image: "https://chemcentrum.nl/wp-content/uploads/2023/04/clonazolam.jpg", slug: "clonazolam-pills" },
-    { id: 5, name: "NEP CRYSTAL PREMIUM", price: 22.99, image: "https://chemcentrum.nl/wp-content/uploads/2023/04/nep-crystal.jpg", slug: "nep-crystal" },
-    { id: 6, name: "BROMAZOLAM PINK PELLET", price: 18.50, image: "https://chemcentrum.nl/wp-content/uploads/2023/04/bromazolam.jpg", slug: "bromazolam" },
+    { id: 1, name: "3-CMC ICE BIG CRYSTALS", price: 24.99, image: "/images/crystals-ice.png", slug: "3-cmc-ice-big-crystals" },
+    { id: 2, name: "4-CMC BOULDER QUALITY", price: 29.50, image: "/images/crystals-white.png", slug: "4-cmc-boulder" },
+    { id: 3, name: "PENTEDRONE SPARK ORIGINAL", price: 32.00, image: "/images/crystals-white.png", slug: "pentedrone-spark" },
+    { id: 4, name: "CLONAZOLAM 0.5MG PILLS", price: 15.00, image: "/images/pills-pink.png", slug: "clonazolam-pills" },
+    { id: 5, name: "NEP CRYSTAL PREMIUM", price: 22.99, image: "/images/crystals-white.png", slug: "nep-crystal" },
+    { id: 6, name: "BROMAZOLAM PINK PELLET", price: 18.50, image: "/images/pills-pink.png", slug: "bromazolam" },
 ];
 
 export default function ProductDetailsPage() {
