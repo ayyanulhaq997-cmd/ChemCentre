@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Header from "@/components/layout/Header";
-import { Check, CreditCard, ChevronRight, ArrowLeft, ShoppingCart } from "lucide-react";
+import { Check, CreditCard, ChevronRight, ArrowLeft, ShoppingCart, Trash2 } from "lucide-react";
 import { useCartStore } from "@/store/useCartStore";
 import { cn } from "@/lib/utils";
 
 // Step Components
 const Step1 = ({ next }: { next: () => void }) => {
-    const { items, total, updateQuantity } = useCartStore();
+    const { items, total, updateQuantity, removeItem } = useCartStore();
 
     if (items.length === 0) {
         return (
@@ -50,13 +50,20 @@ const Step1 = ({ next }: { next: () => void }) => {
                                     <p className="text-xs text-gray-400">Laboratory Grade</p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-6">
+                            <div className="flex items-center gap-4">
                                 <div className="flex items-center gap-3 bg-gray-50 rounded-lg px-2 py-1">
-                                    <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="text-gray-400 hover:text-black">-</button>
+                                    <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="text-gray-400 hover:text-black font-bold">-</button>
                                     <span className="font-bold text-sm">{item.quantity}</span>
-                                    <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="text-gray-400 hover:text-black">+</button>
+                                    <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="text-gray-400 hover:text-black font-bold">+</button>
                                 </div>
                                 <span className="font-black">€{(item.price * item.quantity).toFixed(2)}</span>
+                                <button
+                                    onClick={() => removeItem(item.id)}
+                                    className="text-gray-300 hover:text-red-500 transition-colors ml-2"
+                                    title="Remove item"
+                                >
+                                    <Trash2 className="w-4 h-4" />
+                                </button>
                             </div>
                         </div>
                     ))}

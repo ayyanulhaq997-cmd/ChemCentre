@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Header from "@/components/layout/Header";
 import QuickView from "@/components/shop/QuickView";
 import Sidebar from "@/components/layout/Sidebar";
@@ -12,6 +12,7 @@ import { PRODUCTS } from "@/constants/products";
 
 export default function ProductDetailsPage() {
     const { slug } = useParams();
+    const router = useRouter();
     const product = PRODUCTS.find(p => p.slug === slug);
 
     if (!product) return <div>Product not found</div>;
@@ -39,7 +40,7 @@ export default function ProductDetailsPage() {
                             </div>
 
                             <div className="bg-white rounded-[3rem] p-12 border border-gray-100 shadow-sm">
-                                <QuickView {...product} onClose={() => {}} />
+                                <QuickView {...product} onClose={() => router.push("/")} />
                             </div>
 
                             <div className="mt-12 bg-white rounded-[3rem] p-12 border border-gray-100 shadow-sm">
