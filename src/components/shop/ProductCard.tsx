@@ -1,11 +1,12 @@
 "use client";
 
 import { useCartStore } from "@/store/useCartStore";
-import { ShoppingCart, Eye, Star } from "lucide-react";
+import { ShoppingCart, Eye, Star, Check } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import QuickView from "./QuickView";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 interface ProductCardProps {
   id: number;
@@ -20,6 +21,19 @@ interface ProductCardProps {
 const ProductCard = (product: ProductCardProps) => {
   const { addItem } = useCartStore();
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
+  const [added, setAdded] = useState(false);
+
+  const handleAdd = () => {
+    addItem({ 
+      id: product.id, 
+      name: product.name, 
+      price: product.price, 
+      image: product.image, 
+      slug: product.slug 
+    });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
 
   return (
     <div className="group bg-[#111111] border border-white/5 rounded-lg overflow-hidden flex flex-col hover:border-[#f5a623]/20 transition-all shadow-xl">
@@ -80,17 +94,25 @@ const ProductCard = (product: ProductCardProps) => {
           </div>
           
           <button 
-            onClick={() => addItem({ 
-              id: product.id, 
-              name: product.name, 
-              price: product.price, 
-              image: product.image, 
-              slug: product.slug 
-            })}
-            className="w-full bg-white/5 border border-white/10 text-white hover:bg-[#f5a623] hover:text-black hover:border-transparent py-3 rounded-lg flex items-center justify-center gap-2 text-xs font-black uppercase tracking-widest transition-all active:scale-95"
+            onClick={handleAdd}
+            className={cn(
+                "w-full py-3 rounded-lg flex items-center justify-center gap-2 text-xs font-black uppercase tracking-widest transition-all active:scale-95",
+                added 
+                ? "bg-green-500 text-white" 
+                : "bg-white/5 border border-white/10 text-white hover:bg-[#f5a623] hover:text-black hover:border-transparent"
+            )}
           >
-            <ShoppingCart className="w-4 h-4" />
-            Add to Cart
+            {added ? (
+                <>
+                    <Check className="w-4 h-4" />
+                    Added!
+                </>
+            ) : (
+                <>
+                    <ShoppingCart className="w-4 h-4" />
+                    Add to Cart
+                </>
+            )}
           </button>
         </div>
       </div>

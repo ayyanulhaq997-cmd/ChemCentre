@@ -8,18 +8,11 @@ import Footer from "@/components/layout/Footer";
 import { ChevronRight } from "lucide-react";
 
 // Mock products database
-const allProducts = [
-    { id: 1, name: "3-CMC ICE BIG CRYSTALS", price: 24.99, image: "/images/crystals-ice.png", slug: "3-cmc-ice-big-crystals" },
-    { id: 2, name: "4-CMC BOULDER QUALITY", price: 29.50, image: "/images/crystals-white.png", slug: "4-cmc-boulder" },
-    { id: 3, name: "PENTEDRONE SPARK ORIGINAL", price: 32.00, image: "/images/crystals-white.png", slug: "pentedrone-spark" },
-    { id: 4, name: "CLONAZOLAM 0.5MG PILLS", price: 15.00, image: "/images/pills-pink.png", slug: "clonazolam-pills" },
-    { id: 5, name: "NEP CRYSTAL PREMIUM", price: 22.99, image: "/images/crystals-white.png", slug: "nep-crystal" },
-    { id: 6, name: "BROMAZOLAM PINK PELLET", price: 18.50, image: "/images/pills-pink.png", slug: "bromazolam" },
-];
+import { PRODUCTS } from "@/constants/products";
 
 export default function ProductDetailsPage() {
     const { slug } = useParams();
-    const product = allProducts.find(p => p.slug === slug);
+    const product = PRODUCTS.find(p => p.slug === slug);
 
     if (!product) return <div>Product not found</div>;
 

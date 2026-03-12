@@ -3,13 +3,31 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Header from "@/components/layout/Header";
-import { Check, CreditCard, ChevronRight, ArrowLeft } from "lucide-react";
+import { Check, CreditCard, ChevronRight, ArrowLeft, ShoppingCart } from "lucide-react";
 import { useCartStore } from "@/store/useCartStore";
 import { cn } from "@/lib/utils";
 
 // Step Components
 const Step1 = ({ next }: { next: () => void }) => {
     const { items, total, updateQuantity } = useCartStore();
+
+    if (items.length === 0) {
+        return (
+            <div className="bg-white rounded-3xl p-12 border border-gray-100 shadow-sm text-center">
+                <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <ShoppingCart className="w-10 h-10 text-gray-300" />
+                </div>
+                <h2 className="text-2xl font-black mb-4">Your Cart is Empty</h2>
+                <p className="text-gray-400 mb-8 max-w-sm mx-auto">Looks like you haven&apos;t added any research chemicals to your cart yet.</p>
+                <button
+                    onClick={() => window.location.href = "/"}
+                    className="h-14 px-8 bg-[#222222] text-white rounded-2xl font-black hover:bg-black transition-all"
+                >
+                    Return to Shop
+                </button>
+            </div>
+        );
+    }
 
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -52,8 +70,7 @@ const Step1 = ({ next }: { next: () => void }) => {
 
             <button
                 onClick={next}
-                disabled={items.length === 0}
-                className="w-full h-16 bg-[#222222] text-white rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-black transition-all shadow-xl shadow-black/10 disabled:opacity-50"
+                className="w-full h-16 bg-[#222222] text-white rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-black transition-all shadow-xl shadow-black/10"
             >
                 Continue to Shipping
                 <ChevronRight className="w-5 h-5" />
@@ -130,6 +147,22 @@ const Step3 = () => {
 
 export default function CheckoutPage() {
     const [step, setStep] = useState(1);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return (
+            <div className="min-h-screen bg-[#F9FAFB]">
+                <Header />
+                <main className="container mx-auto px-4 py-12 max-w-3xl flex items-center justify-center">
+                    <div className="w-12 h-12 border-4 border-[#222222] border-t-transparent rounded-full animate-spin" />
+                </main>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-[#F9FAFB]">

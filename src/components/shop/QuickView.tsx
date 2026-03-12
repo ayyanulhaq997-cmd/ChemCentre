@@ -18,12 +18,17 @@ interface QuickViewProps {
 const QuickView = ({ id, name, price, image, slug, onClose }: QuickViewProps) => {
     const [quantity, setQuantity] = useState(1);
     const addItem = useCartStore((state) => state.addItem);
+    const [added, setAdded] = useState(false);
 
     const handleAddToCart = () => {
         for (let i = 0; i < quantity; i++) {
             addItem({ id, name, price, image, slug });
         }
-        onClose();
+        setAdded(true);
+        setTimeout(() => {
+            setAdded(false);
+            onClose();
+        }, 1000);
     };
 
     return (
@@ -97,9 +102,11 @@ const QuickView = ({ id, name, price, image, slug, onClose }: QuickViewProps) =>
                                 
                                 <button 
                                     onClick={handleAddToCart}
-                                    className="flex-grow bg-[#f5a623] text-black h-14 rounded-lg font-black uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all"
+                                    className={`flex-grow h-14 rounded-lg font-black uppercase text-xs tracking-widest transition-all ${
+                                        added ? "bg-green-500 text-white" : "bg-[#f5a623] text-black hover:bg-white hover:text-black"
+                                    }`}
                                 >
-                                    Add to Cart
+                                    {added ? "Added to Cart!" : "Add to Cart"}
                                 </button>
                             </div>
 

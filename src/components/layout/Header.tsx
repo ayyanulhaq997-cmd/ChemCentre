@@ -1,12 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search, ShoppingCart, Menu, X, ChevronDown, Phone, Mail, Home } from "lucide-react";
 import { useCartStore } from "@/store/useCartStore";
 
 const Header = () => {
     const { items } = useCartStore();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     return (
         <header className="w-full bg-[#000000] text-white">
@@ -65,16 +70,19 @@ const Header = () => {
                     </div>
 
                     {/* Cart Block */}
-                    <button className="flex items-center gap-4 bg-[#111111] p-3 rounded-lg border border-white/5 hover:border-[#f5a623]/30 transition-all">
+                    <button 
+                        onClick={() => window.location.href = "/checkout"}
+                        className="flex items-center gap-4 bg-[#111111] p-3 rounded-lg border border-white/5 hover:border-[#f5a623]/30 transition-all"
+                    >
                         <div className="relative">
                             <ShoppingCart className="w-8 h-8 text-[#f5a623]" />
                             <span className="absolute -top-1 -right-1 bg-[#f5a623] text-black text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center">
-                                {items.length}
+                                {mounted ? items.reduce((acc, item) => acc + item.quantity, 0) : 0}
                             </span>
                         </div>
                         <div className="text-left hidden lg:block">
                             <p className="text-[11px] text-[#f5a623] font-black uppercase tracking-wider leading-none mb-1">Shopping Cart</p>
-                            <p className="text-xs font-bold text-gray-400">{items.length} items</p>
+                            <p className="text-xs font-bold text-gray-400">{mounted ? items.reduce((acc, item) => acc + item.quantity, 0) : 0} items</p>
                         </div>
                     </button>
                     
@@ -105,9 +113,20 @@ const Header = () => {
                                 type="text" 
                                 placeholder="Search our catalog" 
                                 className="bg-transparent text-xs w-64 outline-none placeholder:text-gray-500"
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        window.location.href = `/search?q=${(e.target as HTMLInputElement).value}`;
+                                    }
+                                }}
                             />
                         </div>
-                        <button className="h-10 px-4 bg-[#f5a623] text-black hover:bg-[#e59512] transition-colors rounded-r">
+                        <button 
+                            onClick={(e) => {
+                                const input = e.currentTarget.previousSibling?.firstChild as HTMLInputElement;
+                                if (input) window.location.href = `/search?q=${input.value}`;
+                            }}
+                            className="h-10 px-4 bg-[#f5a623] text-black hover:bg-[#e59512] transition-colors rounded-r"
+                        >
                             <Search className="w-5 h-5" />
                         </button>
                     </div>
