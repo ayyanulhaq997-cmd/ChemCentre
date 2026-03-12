@@ -1,105 +1,101 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
-import { Eye, Plus, TrendingUp, Sparkles } from "lucide-react";
 import { useCartStore } from "@/store/useCartStore";
-import Modal from "@/components/ui/Modal";
-import QuickView from "@/components/shop/QuickView";
+import { ShoppingCart, Eye, Star } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import QuickView from "./QuickView";
 
 interface ProductCardProps {
-    id: number;
-    name: string;
-    price: number;
-    image: string;
-    slug: string;
-    isBestseller?: boolean;
-    isNew?: boolean;
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  slug: string;
+  isBestseller?: boolean;
+  isNew?: boolean;
 }
 
-const ProductCard = ({ id, name, price, image, slug, isBestseller, isNew }: ProductCardProps) => {
-    const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
-    const addItem = useCartStore((state) => state.addItem);
+const ProductCard = (product: ProductCardProps) => {
+  const { addItem } = useCartStore();
+  const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
 
-    return (
-        <>
-            <div className="group relative bg-white border border-gray-100 rounded-[2rem] p-4 transition-all duration-300 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)] hover:-translate-y-1 overflow-hidden">
+  return (
+    <div className="group bg-[#111111] border border-white/5 rounded-lg overflow-hidden flex flex-col hover:border-[#f5a623]/20 transition-all shadow-xl">
+      {/* Product Image */}
+      <div className="relative aspect-square overflow-hidden bg-[#0a0a0a]">
+        <Link href={`/product/${product.slug}`} className="block h-full">
+            <img 
+              src={product.image} 
+              alt={product.name}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+            />
+        </Link>
+        
+        {/* Badges */}
+        <div className="absolute top-4 left-4 flex flex-col gap-2">
+            {product.isBestseller && (
+                <span className="bg-[#f5a623] text-black text-[9px] font-black uppercase px-3 py-1 rounded-sm shadow-xl">
+                    Bestseller
+                </span>
+            )}
+            {product.isNew && (
+                <span className="bg-white text-black text-[9px] font-black uppercase px-3 py-1 rounded-sm shadow-xl">
+                    New Crystal
+                </span>
+            )}
+        </div>
 
-                {/* Badges */}
-                <div className="absolute top-6 left-6 z-10 flex flex-col gap-2">
-                    {isBestseller && (
-                        <div className="bg-[#222222] text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg shadow-black/20">
-                            <TrendingUp className="w-3 h-3" />
-                            Bestseller
-                        </div>
-                    )}
-                    {isNew && (
-                        <div className="bg-white text-[#222222] border-2 border-[#222222] text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
-                            <Sparkles className="w-3 h-3 text-orange-400" />
-                            New Crystal
-                        </div>
-                    )}
-                </div>
-
-                {/* Image Container */}
-                <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-gray-50 mb-6 drop-shadow-sm">
-                    <Image
-                        src={image}
-                        alt={name}
-                        fill
-                        className="object-contain p-6 mix-blend-multiply group-hover:scale-110 transition-transform duration-500"
-                    />
-
-                    {/* Hover Overlay - Quick View */}
-                    <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                        <button
-                            onClick={() => setIsQuickViewOpen(true)}
-                            className="bg-white text-[#222222] py-3 px-6 rounded-2xl font-bold flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-gray-100 scale-90 hover:scale-100"
-                        >
-                            <Eye className="w-4 h-4" />
-                            Quick View
-                        </button>
-                    </div>
-                </div>
-
-                {/* Content */}
-                <div className="px-2 pb-2">
-                    <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-1">
-                        Research Chemicals
-                    </h3>
-                    <p className="text-lg font-black text-[#222222] leading-tight mb-4 group-hover:text-black transition-colors">
-                        {name}
-                    </p>
-
-                    <div className="flex items-center justify-between gap-4">
-                        <div className="flex flex-col">
-                            <span className="text-xs font-bold text-gray-400 line-through">
-                                €{(price * 1.2).toFixed(2)}
-                            </span>
-                            <span className="text-xl font-black text-[#222222]">
-                                €{price.toFixed(2)}
-                            </span>
-                        </div>
-
-                        <button
-                            onClick={() => addItem({ id, name, price, image, slug })}
-                            className="h-14 w-14 bg-[#222222] text-white rounded-2xl flex items-center justify-center hover:bg-black hover:scale-105 active:scale-95 transition-all shadow-lg shadow-black/10"
-                        >
-                            <Plus className="w-6 h-6" />
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <Modal
-                isOpen={isQuickViewOpen}
-                onClose={() => setIsQuickViewOpen(false)}
-                title="Product Laboratory Analysis"
+        {/* Quick Actions Hover */}
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+            <button 
+                onClick={() => setIsQuickViewOpen(true)}
+                className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-[#f5a623] transition-colors shadow-2xl scale-75 group-hover:scale-100 duration-300"
             >
-                <QuickView id={id} name={name} price={price} image={image} slug={slug} />
-            </Modal>
-        </>
-    );
+                <Eye className="w-5 h-5 text-black" />
+            </button>
+        </div>
+      </div>
+
+      {/* Details */}
+      <div className="p-6 flex flex-col flex-grow">
+        <div className="flex items-center gap-1 mb-2">
+            {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-2.5 h-2.5 fill-[#f5a623] text-[#f5a623]" />
+            ))}
+        </div>
+        
+        <Link href={`/product/${product.slug}`} className="block mb-3">
+            <h3 className="text-sm font-black text-white hover:text-[#f5a623] transition-colors leading-snug line-clamp-2 uppercase tracking-wide">
+                {product.name}
+            </h3>
+        </Link>
+        
+        <div className="mt-auto pt-4 flex flex-col gap-4">
+          <div className="flex items-baseline gap-2">
+            <span className="text-lg font-black text-[#f5a623]">€{product.price.toFixed(2)}</span>
+            <span className="text-[10px] text-gray-500 font-bold">Incl. VAT</span>
+          </div>
+          
+          <button 
+            onClick={() => addItem({ 
+              id: product.id, 
+              name: product.name, 
+              price: product.price, 
+              image: product.image, 
+              slug: product.slug 
+            })}
+            className="w-full bg-white/5 border border-white/10 text-white hover:bg-[#f5a623] hover:text-black hover:border-transparent py-3 rounded-lg flex items-center justify-center gap-2 text-xs font-black uppercase tracking-widest transition-all active:scale-95"
+          >
+            <ShoppingCart className="w-4 h-4" />
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+      {isQuickViewOpen && <QuickView {...product} onClose={() => setIsQuickViewOpen(false)} />}
+    </div>
+  );
 };
 
 export default ProductCard;

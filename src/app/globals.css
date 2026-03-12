@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --primary: #222222;
-  --background: #FFFFFF;
-  --accent: #E5E7EB;
-  --foreground: #222222;
+  --primary: #f5a623;
+  --background: #000000;
+  --foreground: #ffffff;
+  --card-bg: #111111;
+  --border: #222222;
+  --accent: #f5a623;
 }
 
 body {
@@ -16,38 +18,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar for premium feel */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #111111;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #222222;
+  background: var(--primary);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #444444;
+  background: #e59512;
 }
 
 @layer base {
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-bold tracking-tight text-[#222222];
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-white;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer components {
+  .btn-primary {
+    @apply bg-[#f5a623] text-black font-bold px-6 py-2 rounded transition-all hover:bg-[#e59512] active:scale-95;
   }
 }
